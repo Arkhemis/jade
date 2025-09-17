@@ -1,0 +1,89 @@
+[gd_scene load_steps=11 format=3 uid="uid://c25f6lhwtn64g"]
+
+[ext_resource type="Script" uid="uid://cef42n1dvtxh7" path="res://levels/roadchase/dashboard.gd" id="1_d2uo7"]
+[ext_resource type="PackedScene" uid="uid://be0gqha8c1nom" path="res://cockpit.tscn" id="2_r601w"]
+[ext_resource type="PackedScene" uid="uid://b3aa1uvbdskd5" path="res://wheel_arm.tscn" id="3_uvhbu"]
+[ext_resource type="Texture2D" uid="uid://cuvdjsaesxo3v" path="res://levels/roadchase/mosquito_posing.png" id="4_i14uo"]
+[ext_resource type="Texture2D" uid="uid://rrxftxrlgpg4" path="res://assets/ui/Xbox Series/Default/xbox_button_color_a.png" id="5_i14uo"]
+[ext_resource type="AudioStream" uid="uid://do8d2kaf44i54" path="res://levels/roadchase/Redpill - The Chase (Eatbrain 183).mp3" id="6_r601w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d2uo7"]
+size = Vector2(974, 386)
+
+[sub_resource type="Animation" id="Animation_r601w"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_i14uo"]
+resource_name = "Traveling"
+length = 0.2
+loop_mode = 2
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nsf8c"]
+_data = {
+&"RESET": SubResource("Animation_r601w"),
+&"Traveling": SubResource("Animation_i14uo")
+}
+
+[node name="dashboard" type="Node2D"]
+script = ExtResource("1_d2uo7")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-4, -5)
+zoom = Vector2(0.935, 0.935)
+limit_bottom = 500
+limit_smoothed = true
+position_smoothing_enabled = true
+
+[node name="cockpit" parent="." instance=ExtResource("2_r601w")]
+position = Vector2(-626, -390)
+scale = Vector2(1.09, 1.09)
+metadata/_edit_lock_ = true
+
+[node name="MosquitoTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="MosquitosSpawn" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MosquitosSpawn"]
+position = Vector2(-6, -70)
+shape = SubResource("RectangleShape2D_d2uo7")
+
+[node name="Mosquitos" type="Node2D" parent="MosquitosSpawn/CollisionShape2D"]
+position = Vector2(-62, 94)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_nsf8c")
+}
+autoplay = "Traveling"
+
+[node name="wheel_arm" parent="." instance=ExtResource("3_uvhbu")]
+position = Vector2(-241, 270)
+
+[node name="MosquitoPosingBg" type="Sprite2D" parent="."]
+position = Vector2(350, 226)
+scale = Vector2(0.100102, 0.0877205)
+skew = -0.39619
+texture = ExtResource("4_i14uo")
+
+[node name="Sprite2D" type="Sprite2D" parent="MosquitoPosingBg"]
+position = Vector2(348.595, 364.565)
+scale = Vector2(5.18425, 5.59319)
+texture = ExtResource("5_i14uo")
+
+[node name="NeedTurnTimer" type="Timer" parent="."]
+
+[node name="TurnTimeLimit" type="Timer" parent="."]
+
+[node name="redpill" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_r601w")
+volume_db = -6.639
+bus = &"Music"
+
+[node name="DropTimer" type="Timer" parent="."]
+
+[connection signal="steer_direction" from="cockpit" to="." method="_on_cockpit_steer_direction"]
+[connection signal="timeout" from="MosquitoTimer" to="." method="_on_stain_timer_timeout"]
+[connection signal="timeout" from="NeedTurnTimer" to="." method="_on_need_turn_timer_timeout"]
+[connection signal="timeout" from="TurnTimeLimit" to="." method="_on_turn_time_limit_timeout"]
+[connection signal="timeout" from="DropTimer" to="." method="_on_drop_timer_timeout"]

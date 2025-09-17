@@ -1,0 +1,164 @@
+[gd_scene load_steps=10 format=3 uid="uid://bp2jev3isucqp"]
+
+[ext_resource type="Script" uid="uid://co5iwh6askstu" path="res://levels/roadchase/mosquito.gd" id="1_kwssc"]
+[ext_resource type="Texture2D" uid="uid://bxcyuat8tgqqk" path="res://levels/roadchase/moskito_1.png" id="2_8bti6"]
+[ext_resource type="Texture2D" uid="uid://dqt5ssdsaaq8y" path="res://levels/roadchase/muscular_arm.png" id="3_tkjgk"]
+[ext_resource type="AudioStream" uid="uid://ltupponwvcd5" path="res://assets/sounds/cartoonPunch_nicholasDaryl.wav" id="4_022jd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cdl8f"]
+radius = 47.0956
+
+[sub_resource type="Animation" id="Animation_woa8i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MuscularArm:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MuscularArm:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-955, 79)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Mosquito:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_cdl8f"]
+resource_name = "moskito_appear"
+length = 0.2
+
+[sub_resource type="Animation" id="Animation_w3310"]
+resource_name = "squash"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MuscularArm:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MuscularArm:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-955, 79), Vector2(-449, 18), Vector2(-955, 79)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Mosquito:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.18, 0.28, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(690, -2), Vector2(1849, 6)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.966667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.133333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w3310"]
+_data = {
+&"RESET": SubResource("Animation_woa8i"),
+&"moskito_appear": SubResource("Animation_cdl8f"),
+&"squash": SubResource("Animation_w3310")
+}
+
+[node name="Mosquito" type="Area2D"]
+script = ExtResource("1_kwssc")
+
+[node name="Mosquito" type="Sprite2D" parent="."]
+scale = Vector2(0.161553, 0.141127)
+skew = -0.340339
+texture = ExtResource("2_8bti6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_cdl8f")
+
+[node name="MuscularArm" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-955, 79)
+rotation = 0.424115
+scale = Vector2(1.44063, 0.756641)
+texture = ExtResource("3_tkjgk")
+flip_h = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_w3310")
+}
+autoplay = "moskito_appear"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_022jd")

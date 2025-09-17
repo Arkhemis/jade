@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://coghtdtqv23w7"]
+
+[ext_resource type="Texture2D" uid="uid://d0wwkkqqrdd8f" path="res://assets/beach.jpg" id="1_xbl7m"]
+[ext_resource type="Texture2D" uid="uid://c067neh73l5hc" path="res://assets/maitre_nageur_dos.png" id="2_xoq1a"]
+[ext_resource type="Texture2D" uid="uid://dcb4s3cbwfera" path="res://assets/cabine_fermee_femme.png" id="3_xoq1a"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Beach" type="Sprite2D" parent="."]
+position = Vector2(279.501, 266.5)
+scale = Vector2(2.35286, 2.34491)
+texture = ExtResource("1_xbl7m")
+
+[node name="MaitreNageurDos" type="Sprite2D" parent="."]
+position = Vector2(-313, 459)
+scale = Vector2(0.605957, 0.476237)
+texture = ExtResource("2_xoq1a")
+
+[node name="CabineFermeeFemme" type="Sprite2D" parent="."]
+position = Vector2(617, 300)
+scale = Vector2(0.618896, 0.533691)
+texture = ExtResource("3_xoq1a")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(280, 269)
+zoom = Vector2(0.635, 0.635)

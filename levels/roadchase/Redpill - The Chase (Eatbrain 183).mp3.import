@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://do8d2kaf44i54"
+path="res://.godot/imported/Redpill - The Chase (Eatbrain 183).mp3-1c70edc3dcfaed69f8b0413fb4791ad4.mp3str"
+
+[deps]
+
+source_file="res://levels/roadchase/Redpill - The Chase (Eatbrain 183).mp3"
+dest_files=["res://.godot/imported/Redpill - The Chase (Eatbrain 183).mp3-1c70edc3dcfaed69f8b0413fb4791ad4.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

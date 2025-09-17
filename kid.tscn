@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://bfonv15lj17qw"]
+
+[ext_resource type="Script" uid="uid://bksbjn5l1owu5" path="res://kid.gd" id="1_qmkmx"]
+[ext_resource type="Texture2D" uid="uid://hs02l1h272h4" path="res://levels/roadchase/6vnly6r0.png" id="1_to882"]
+[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="3_86h6l"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_xpryy"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_xpryy"]
+
+[sub_resource type="Resource" id="Resource_gres5"]
+script = ExtResource("4_xpryy")
+duration = 1.0
+transition = 0
+ease = 2
+
+[node name="Kid" type="Node2D"]
+script = ExtResource("1_qmkmx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_to882")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(374, -85)
+zoom = Vector2(8.435, 5.99)
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("3_xpryy")
+
+[node name="Markers" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="Markers"]
+position = Vector2(372, -85)
+
+[node name="Marker2D2" type="Marker2D" parent="Markers"]
+position = Vector2(-55, -272)
+
+[node name="Marker2D3" type="Marker2D" parent="Markers"]
+position = Vector2(-566, 63)
+
+[node name="Marker2D4" type="Marker2D" parent="Markers"]
+position = Vector2(334, 116)
+
+[node name="PhantomCamera2D" type="Node2D" parent="."]
+position = Vector2(374, -85)
+script = ExtResource("3_86h6l")
+zoom = Vector2(8.435, 5.99)
+tween_resource = SubResource("Resource_gres5")
+metadata/_custom_type_script = "uid://bhexx6mj1xv3q"

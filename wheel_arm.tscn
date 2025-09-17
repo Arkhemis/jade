@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3aa1uvbdskd5"]
+
+[ext_resource type="Script" uid="uid://dqvwr1a2odqa5" path="res://wheel_arm.gd" id="1_5qaq2"]
+[ext_resource type="Texture2D" uid="uid://blx2kynv4sbwj" path="res://levels/roadchase/volant.png" id="1_nbbfr"]
+[ext_resource type="Texture2D" uid="uid://dqt5ssdsaaq8y" path="res://levels/roadchase/muscular_arm.png" id="2_5qaq2"]
+[ext_resource type="AudioStream" uid="uid://bisw3jf6l3kec" path="res://assets/sounds/Car Drifting Sound Effect.mp3" id="4_20dod"]
+
+[node name="wheel_arm" type="Node2D"]
+script = ExtResource("1_5qaq2")
+
+[node name="Volant" type="Sprite2D" parent="."]
+scale = Vector2(0.456055, 0.396606)
+texture = ExtResource("1_nbbfr")
+
+[node name="MuscularArm" type="Sprite2D" parent="Volant"]
+position = Vector2(236.677, -97.7039)
+scale = Vector2(1.08378, 0.927055)
+texture = ExtResource("2_5qaq2")
+
+[node name="CarDriftingSoundEffect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_20dod")

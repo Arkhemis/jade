@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyjg4yrqi2xt5"]
+
+[ext_resource type="Script" uid="uid://c56e6ywtnj6tq" path="res://node_2d.gd" id="1_0e48y"]
+[ext_resource type="PackedScene" uid="uid://lk0o5o2aby0u" path="res://projectiles.tscn" id="1_wtcfe"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_0e48y")
+
+[node name="Projectiles" parent="." instance=ExtResource("1_wtcfe")]
+position = Vector2(557, 245)
+script = null

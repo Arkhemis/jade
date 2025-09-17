@@ -1,0 +1,110 @@
+[gd_scene load_steps=12 format=3 uid="uid://be0gqha8c1nom"]
+
+[ext_resource type="Script" uid="uid://8d7npdaqs3fp" path="res://levels/roadchase/cockpit.gd" id="1_ch6fn"]
+[ext_resource type="Texture2D" uid="uid://c7ysnx4kdl1cc" path="res://levels/roadchase/landscape_1.png" id="1_g74d3"]
+[ext_resource type="Texture2D" uid="uid://cgokirkccj4ee" path="res://levels/roadchase/route_1 - Copie.png" id="2_1jp4n"]
+[ext_resource type="Texture2D" uid="uid://cdn04tvaph2wr" path="res://levels/roadchase/landscape_2.png" id="2_3hv5m"]
+[ext_resource type="Texture2D" uid="uid://boht6xparvvml" path="res://levels/roadchase/landscape_3.png" id="4_0uwqg"]
+[ext_resource type="Texture2D" uid="uid://t3phnds162th" path="res://assets/ui/Xbox Series/Default/xbox_rb_outline.png" id="4_a03hb"]
+[ext_resource type="Texture2D" uid="uid://c130vpawrfr0p" path="res://levels/roadchase/panneau.png" id="5_3hv5m"]
+[ext_resource type="Texture2D" uid="uid://bnw10mbjqsnfg" path="res://assets/ui/Xbox Series/Default/xbox_lb_outline.png" id="6_0uwqg"]
+
+[sub_resource type="Animation" id="Animation_1jp4n"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_g74d3"]
+resource_name = "traveling"
+length = 0.2
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Landscapes:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(588, 258), Vector2(589, 265)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dlc2r"]
+_data = {
+&"RESET": SubResource("Animation_1jp4n"),
+&"traveling": SubResource("Animation_g74d3")
+}
+
+[node name="cockpit" type="Node2D"]
+script = ExtResource("1_ch6fn")
+
+[node name="Landscapes" type="Node2D" parent="."]
+position = Vector2(588.325, 260.272)
+
+[node name="Landscape1" type="Sprite2D" parent="Landscapes"]
+visible = false
+position = Vector2(-7.32452, 16.728)
+scale = Vector2(0.908873, 1.33387)
+texture = ExtResource("1_g74d3")
+region_enabled = true
+region_rect = Rect2(165.651, 211.831, 1251.86, 323.682)
+
+[node name="LandscapeRight" type="Sprite2D" parent="Landscapes"]
+visible = false
+position = Vector2(-25.3246, 21.728)
+scale = Vector2(1.37572, 1.60714)
+texture = ExtResource("2_3hv5m")
+region_enabled = true
+region_rect = Rect2(0, 118, 865, 280)
+
+[node name="Panneau" type="Sprite2D" parent="Landscapes/LandscapeRight"]
+position = Vector2(-173, -5.59999)
+rotation = -0.0855211
+scale = Vector2(0.205777, 0.110243)
+skew = 0.158825
+texture = ExtResource("5_3hv5m")
+
+[node name="XboxLb" type="Sprite2D" parent="Landscapes/LandscapeRight/Panneau"]
+modulate = Color(0.0110876, 0.0110876, 0.0110876, 1)
+position = Vector2(-13.6398, -166.301)
+rotation = -0.0663225
+scale = Vector2(7.11065, 9.01626)
+skew = 0.171972
+texture = ExtResource("4_a03hb")
+
+[node name="LandscapeLeft" type="Sprite2D" parent="Landscapes"]
+visible = false
+position = Vector2(14.845, 21.9145)
+scale = Vector2(1.13909, 1.65468)
+texture = ExtResource("4_0uwqg")
+region_enabled = true
+region_rect = Rect2(0, 106.5, 985.5, 278.5)
+
+[node name="Panneau" type="Sprite2D" parent="Landscapes/LandscapeLeft"]
+position = Vector2(142.364, 25.1461)
+rotation = 0.125664
+scale = Vector2(0.205777, 0.110243)
+skew = -0.015708
+texture = ExtResource("5_3hv5m")
+
+[node name="XboxLb" type="Sprite2D" parent="Landscapes/LandscapeLeft/Panneau"]
+modulate = Color(0.0110876, 0.0110876, 0.0110876, 1)
+position = Vector2(-45.271, -159.188)
+rotation = -0.231159
+scale = Vector2(7.11065, 9.01626)
+skew = 0.171972
+texture = ExtResource("6_0uwqg")
+
+[node name="Route" type="Sprite2D" parent="."]
+position = Vector2(577.404, 371.5)
+scale = Vector2(0.744417, 0.745819)
+texture = ExtResource("2_1jp4n")
+region_enabled = true
+region_rect = Rect2(0, 0, 1533.26, 897.846)
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_dlc2r")
+}
+autoplay = "traveling"
